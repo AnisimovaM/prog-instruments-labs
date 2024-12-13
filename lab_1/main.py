@@ -1,10 +1,15 @@
 import random
 import string
-from fastapi import *
-from pydantic import *
-from sqlalchemy import *
+
+import uvicorn
+import fastapi
+import pydantic
+import sqlalchemy
+
 from sqlalchemy.ext.declarative import declarativebase
 from sqlalchemy.orm import sessionmaker
+
+
 database = "sqlite:///./test.db"
 engine = createengine(database)
 SessionLocal = sessionmaker(autocommit=False,autoflush=False,bind=engine)
@@ -292,10 +297,6 @@ def apigeneratebooleans(request: Booleanr):
     return {"booleans":booleans}
 
 
-import random
-import string
-
-
 def generaterandomword(length):
     word = ''
     for i in range(length):
@@ -514,9 +515,8 @@ def mainstringswithnumbers():
         savetexttofile('\n'.join(randomstrings),filename)
         print(f"Strings saved to {filename}")
 
-        
+
 if name == "main":
-    import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
     run()
     main()
