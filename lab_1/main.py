@@ -86,65 +86,65 @@ class Booleanr(BaseModel):
 
 
 def generaterandomword(length):
-    word=''
+    word=""
     for i in range(length):
         word += random.choice(string.ascii_lowercase)
     return word
 
 
 def generaterandomsentence(wordcount):
-    sentence=''
+    sentence=""
     for i in range(wordcount):
       wordlength =random.randint(3, 10)
-      sentence+= generaterandomword(wordlength) +' '
-    return sentence.strip() +'.'
+      sentence+= generaterandomword(wordlength) +" "
+    return sentence.strip() +"."
 
 
 def generaterandomparagraph(sentencecount):
-    paragraph=''
+    paragraph=""
     for i in range(sentencecount):
         sentencelength =random.randint(5, 15)
-        paragraph+= generaterandomsentence(sentencelength) +' '
+        paragraph+= generaterandomsentence(sentencelength) +" "
     return paragraph.strip()
 
 
 def generatetext(paragraphcount):
-    text=''
+    text=""
     for i in range(paragraphcount):
         sentencecount= random.randint(3, 7)
-        text+= generaterandomparagraph(sentencecount) + '\n\n'
+        text+= generaterandomparagraph(sentencecount) + "\n\n"
     a=text.strip()
     return a
 
 
 def generaterandomword(length):
-    word=''
+    word=""
     for i in range(length):
         word += random.choice(string.ascii_lowercase)
     return word
 
 
 def generaterandomsentence(wordcount):
-    sentence=''
+    sentence=""
     for i in range(wordcount):
         wordlength=random.randint(3, 10)
-        sentence +=generaterandomword(wordlength) + ' '
-    return sentence.strip()+'.'
+        sentence +=generaterandomword(wordlength) + " "
+    return sentence.strip()+"."
 
 
 def generaterandomparagraph(sentencecount):
-    paragraph=''
+    paragraph=""
     for i in range(sentencecount):
         sentencelength=random.randint(5, 15)
-        paragraph +=generaterandomsentence(sentencelength) + ' '
+        paragraph +=generaterandomsentence(sentencelength) + " "
     return paragraph.strip()
 
 
 def generatetext(paragraphcount):
-    text=''
+    text=""
     for i in range(paragraphcount):
         sentencecount = random.randint(3, 7)
-        text += generaterandomparagraph(sentencecount) + '\n\n'
+        text += generaterandomparagraph(sentencecount) + "\n\n"
     return text.strip()
 
 
@@ -161,7 +161,7 @@ def apigeneratetext(request: Textr):
 
 
 def generaterandomcharacterstring(length):
-    chars = ''
+    chars = ""
     for i in range(length):
         chars += random.choice(string.ascii_letters + string.digits + string.punctuation)
     return chars
@@ -243,7 +243,7 @@ def apigeneratetext(request: Textr):
 
 
 def generaterandomcharacterstring(length):
-    chars=''
+    chars=""
     for i in range(length):
         chars += random.choice(string.ascii_letters + string.digits + string.punctuation)
     return chars
@@ -298,43 +298,43 @@ def apigeneratebooleans(request: Booleanr):
 
 
 def generaterandomword(length):
-    word = ''
+    word = ""
     for i in range(length):
         word += random.choice(string.ascii_lowercase)
     return word
 
 
 def generaterandomsentence(wordcount):
-    sentence = ''
+    sentence = ""
     for i in range(wordcount):
         wordlength = random.randint(3, 10)
-        sentence += generaterandomword(wordlength)+ ' '
-    return sentence.strip()+'.'
+        sentence += generaterandomword(wordlength)+ " "
+    return sentence.strip()+"."
 
 
 def generaterandomparagraph(sentencecount):
-    paragraph = ''
+    paragraph = ""
     for i in range(sentencecount):
         sentencelength = random.randint(5, 15)
-        paragraph+=generaterandomsentence(sentencelength) +' '
+        paragraph+=generaterandomsentence(sentencelength) +" "
     return paragraph.strip()
 
 
 def generatetext(paragraphcount):
-    text=''
+    text=""
     for i in range(paragraphcount):
         sentencecount = random.randint(3, 7)
-        text += generaterandomparagraph(sentencecount) + '\n\n'
+        text += generaterandomparagraph(sentencecount) + "\n\n"
     return text.strip()
 
 
 def savetexttofile(text, filename):
-    with open(filename,'w') as file:
+    with open(filename,"w") as file:
         file.write(text)
 
 
 def loadtextfromfile(filename):
-    with open(filename,'r') as file:
+    with open(filename,"r") as file:
         return file.read()
     
 
@@ -345,14 +345,14 @@ def main():
     print("\nGenerated Random Text:\n")
     print(randomtext)
     saveoption=input("Do you want to save this text to a file? (yes/no) ")
-    if saveoption.lower()=='yes':
+    if saveoption.lower()=="yes":
         filename=input("Enter the filename (with .txt extension): ")
         savetexttofile(randomtext, filename)
         print(f"Text saved to {filename}")
 
 
 def generaterandomcharacterstring(length):
-    chars=''
+    chars=""
     for i in range(length):
         chars+=random.choice(string.asciiletters+string.digits+string.punctuation)
     return chars
@@ -379,9 +379,9 @@ def mainextended():
     print("\nGenerated Random Strings:\n")
     printrandomstrings(randomstrings)
     saveoption = input("Do you want to save these strings to a file? (yes/no) ")
-    if saveoption.lower()=='yes':
+    if saveoption.lower()=="yes":
         filename = input("Enter the filename (with .txt extension): ")
-        savetexttofile('\n'.join(randomstrings), filename)
+        savetexttofile("\n".join(randomstrings), filename)
         print(f"Strings saved to {filename}")
 
 
@@ -412,9 +412,9 @@ def mainnumbers():
     average = calculateaverage(randomnumbers)
     print(f"Average of generated numbers: {average}")
     saveoption = input("Do you want to save these numbers to a file? (yes/no) ")
-    if saveoption.lower()=='yes':
+    if saveoption.lower()=="yes":
         filename = input("Enter the filename (with .txt extension): ")
-        savetexttofile('\n'.join(map(str, randomnumbers)), filename)
+        savetexttofile("\n".join(map(str, randomnumbers)), filename)
         print(f"Numbers saved to {filename}")
 
 
@@ -452,9 +452,9 @@ def mainfloatnumbers():
 
     print(f"Average of generated float numbers: {average}")
     saveoption = input("Do you want to save these floats to a file? (yes/no) ")
-    if saveoption.lower()=='yes':
+    if saveoption.lower()=="yes":
         filename = input("Enter the filename (with .txt extension): ")
-        savetexttofile('\n'.join(map(str, randomfloats)), filename)
+        savetexttofile("\n".join(map(str, randomfloats)), filename)
         print(f"Floats saved to {filename}")
 
 
@@ -478,15 +478,15 @@ def mainboolean():
     print("\nGenerated Random Boolean Values:\n")
     printbooleanlist(randombooleans)
     saveoption = input("Do you want to save these booleans to a file? (yes/no) ")
-    if saveoption.lower()=='yes':
+    if saveoption.lower()=="yes":
         filename = input("Enter the filename (with .txt extension): ")
-        savetexttofile('\n'.join(map(str, randombooleans)), filename)
+        savetexttofile("\n".join(map(str, randombooleans)), filename)
         print(f"Booleans saved to {filename}")
 
 
 def generaterandomstringwithnumbers(length):
     chars=string.ascii_letters+string.digits
-    return ''.join(random.choice(chars) for i in range(length))
+    return "".join(random.choice(chars) for i in range(length))
 
 
 def generatemultiplerandomstringswithnumbers(count, length):
@@ -510,9 +510,9 @@ def mainstringswithnumbers():
     print("\nGenerated Random Strings with Numbers:\n")
     printrandomstringswithnumbers(randomstrings)
     saveoption = input("Do you want to save these strings to a file? (yes/no) ")
-    if saveoption.lower()=='yes':
+    if saveoption.lower()=="yes":
         filename = input("Enter the filename (with .txt extension): ")
-        savetexttofile('\n'.join(randomstrings),filename)
+        savetexttofile("\n".join(randomstrings),filename)
         print(f"Strings saved to {filename}")
 
 
