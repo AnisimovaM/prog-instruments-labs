@@ -2,6 +2,9 @@ import json
 import hashlib
 from typing import List
 
+from path import CSV_PATH, JSON_PATH, PATH_TO_REGULARS
+from validation import csv_to_list, get_invalid_indices, read_json
+
 """
 В этом модуле обитают функции, необходимые для автоматизированной проверки результатов ваших трудов.
 """
@@ -38,9 +41,19 @@ def serialize_result(variant: int, checksum: str) -> None:
     :param variant: номер вашего варианта
     :param checksum: контрольная сумма, вычисленная через calculate_checksum()
     """
-    pass
+    result = {
+        "variant": str(variant),
+        "checksum": checksum
+    }
+    with open("result.json", mode="w", encoding="utf-8") as f:
+        json.dump(result, f)
 
 
 if __name__ == "__main__":
-    print(calculate_checksum([1, 2, 3]))
-    print(calculate_checksum([3, 2, 1]))
+    check_list = []
+    data = csv_to_list(CSV_PATH)
+    regulars = read_json(PATH_TO_REGULARS)
+    check_list = get_invalid_indices(regulars, data)
+    print(len(check_list))
+    print(calculate_checksum(check_list))
+    serialize_result(2, calculate_checksum(check_list))
