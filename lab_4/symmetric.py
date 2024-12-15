@@ -2,14 +2,18 @@ import os
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import padding
-from work_with_files import *
+
+from work_with_files import read_binary_from_file, write_binary_to_file, write_text_to_file
+from logger import logger
 
 
 def generation_key(size_key: int) -> bytes:
 
     if size_key not in [128, 192, 256]:
+        logger.error("Invalid key length. Please choose 128, 192, or 256 bits.")
         raise ValueError("Invalid key length. Please choose 128, 192, or 256 bits.")
     key = os.urandom(size_key // 8)
+    logger.info("Key generated")
     return key
 
 
@@ -18,11 +22,11 @@ def key_serialization(key: bytes, path: str) -> None:
     try:
         with open(path, 'wb') as key_file:
             key_file.write(key)
-
+            logger.info("Key serializated")
     except FileNotFoundError as e:
-        print(f"File not found: {e}")
+        logger.error(f"File not found: {e}")
     except Exception as e:
-        print(f"An error occurred: {e}")
+        logger.error(f"An error occurred: {e}")
 
 
 def key_deserialization(path: str) -> bytes:
@@ -30,12 +34,13 @@ def key_deserialization(path: str) -> bytes:
     try:
         with open(path, "rb") as file:
             key = file.read()
+            logger.info("Key deserializated")
         return key
     
     except FileNotFoundError as e:
-        print(f"File not found: {e}")
+        logger.error(f"File not found: {e}")
     except Exception as e:
-        print(f"An error occurred: {e}")
+        logger.error(f"An error occurred: {e}")
 
 
 def encrypt(key: bytes, path: str, encrypted_path: str) -> None:
@@ -51,6 +56,7 @@ def encrypt(key: bytes, path: str, encrypted_path: str) -> None:
     cipher_text = iv + encryptor.update(padded_text) + encryptor.finalize()
 
     write_binary_to_file(encrypted_path, cipher_text)
+    logger.info("Encrypted")
 
 
 def decrypt(key: bytes, encrypted_path: str, decrypted_path: str) -> None:
@@ -68,6 +74,7 @@ def decrypt(key: bytes, encrypted_path: str, decrypted_path: str) -> None:
     decrypt_text = unpadded_dc_text.decode('utf-8')
 
     write_text_to_file(decrypted_path, decrypt_text)
+    logger.info("Decrypted")
 
 
 def save_generated_key(key: str, path: str) -> None:
@@ -75,7 +82,8 @@ def save_generated_key(key: str, path: str) -> None:
         try:
             with open(path, 'wb') as key_file:
                 key_file.write(key)
+                logger.info("Key saved")
         except FileNotFoundError as e:
-            print(f"File not found: {e}")
+            logger.error(f"File not found: {e}")
         except Exception as e:
-            print(f"An error occurred: {e}")
+            logger.error(f"An error occurred: {e}")
